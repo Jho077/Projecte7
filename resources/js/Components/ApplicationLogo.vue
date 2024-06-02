@@ -1,5 +1,5 @@
 <template>
     <div>
-        <img src="/images/Forquilla.png" alt="Laravel" />
+        <img src="/images/Logo2.png" alt="Laravel" />
     </div>
 </template>
