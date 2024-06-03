@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\Rating;
 use App\Models\Restaurant;
+use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
+use Illuminate\Support\Facades\Redirect;
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -16,6 +20,23 @@ Route::get('/', function () {
         'restaurant' => Restaurant::all(),
     ]);
 })->name('welcome');
+
+Route::get('/google-auth/redirect', function () {
+    return Socialite::driver('google')->redirect();
+});
+ 
+Route::get('/google-auth/callback', function () {
+    $user_google = Socialite::driver('google')->stateless()->user();
+    
+    $user = User::updateOrCreate(
+        ['google_id' => $user_google->id],
+        ['name' => $user_google->name,
+        'email' => $user_google->email]
+    );
+    Auth::login($user);
+
+    return redirect()->route('welcome');
+});
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
