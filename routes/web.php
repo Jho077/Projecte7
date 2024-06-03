@@ -11,15 +11,11 @@ use App\Models\Restaurant;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
-        // 'canLogin' => Route::has('login'),
         'loged' => Auth::user(),
         'rating' => Rating::all(),
         'restaurant' => Restaurant::all(),
-        // 'canRegister' => Route::has('register'),
-        // 'laravelVersion' => Application::VERSION,
-        // 'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('welcome');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
