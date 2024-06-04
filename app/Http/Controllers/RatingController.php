@@ -30,15 +30,28 @@ class RatingController extends Controller
      */
     public function store(Request $request)
     {
-        $rating = new Rating;
-        $rating->user_id = $request->user()->id;
-        $rating->restaurant_id = $request->restaurant_id;
-        $rating->rating = $request->rating;
-        $rating->save();
+    //Ver si el usuario ya voto
+    $existingRating = Rating::where('user_id', $request->user()->id)
+    ->where('restaurant_id', $request->restaurant_id)
+    ->first();
 
-        return response()->json(['message' => 'Valoración creada con éxito']);
+     // Usuario que ya voto, se actualiza su voto
+    if ($existingRating) {
+    $existingRating->rating = $request->rating;
+    $existingRating->save();
+
+    return Inertia::location(route('showRestaurant', ['id' => $request->restaurant_id]));
     }
 
+    // Usuario que nunca voto
+    $rating = new Rating;
+    $rating->user_id = $request->user()->id;
+    $rating->restaurant_id = $request->restaurant_id;
+    $rating->rating = $request->rating;
+    $rating->save();
+    
+    return Inertia::location(route('showRestaurant', ['id' => $request->restaurant_id]));
+    }
     /**
      * Display the specified resource.
      */
@@ -60,12 +73,7 @@ class RatingController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $this->authorize('update', $rating);
-
-        $rating->rating = $request->rating;
-        $rating->save();
-
-        return response()->json(['message' => 'Valoración actualizada con éxito']);
+        //
     }
 
     /**
@@ -73,10 +81,6 @@ class RatingController extends Controller
      */
     public function destroy(string $id)
     {
-        $this->authorize('delete', $rating);
-
-        $rating->delete();
-
-        return response()->json;
+        //
     }
 }

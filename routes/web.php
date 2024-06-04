@@ -15,7 +15,7 @@ use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\CommentController;
 
-
+//Ruta del welcome
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'loged' => Auth::user(),
@@ -24,6 +24,7 @@ Route::get('/', function () {
     ]);
 })->name('welcome');
 
+// Rutas para Oauth con Google
 Route::get('/google-auth/redirect', function () {
     return Socialite::driver('google')->redirect();
 });
@@ -53,9 +54,18 @@ Route::middleware('auth')->group(function () {
 
 
 
-
+// Rutas para los restaurants
 Route::resource('restaurants', RestaurantController::class);
 Route::post('/restaurants/{id}',[RestaurantController::class, 'update'])->name('updateImage');
+Route::get('/restaurants/{id}/index',[RestaurantController::class, 'index'])->name('showRestaurant');
+
+// Ruta para crear una valoración
+Route::post('/ratings', [RatingController::class, 'store'])->name('ratings.store');
+
+
+
+
+
 
 
 
