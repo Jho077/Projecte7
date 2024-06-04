@@ -80,7 +80,7 @@ class RestaurantController extends Controller
       
      $restaurant = Restaurant::findOrFail($id);
 
-     /
+     
      $restaurant->name = $request->input('name');
      $restaurant->address = $request->input('address');
      $restaurant->latitude = $request->input('latitude');
