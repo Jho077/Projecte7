@@ -5,7 +5,7 @@ import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3'
 
 const showingNavigationDropdown = ref(false);
 </script>
@@ -62,10 +62,12 @@ const showingNavigationDropdown = ref(false);
           <a href="#" class="block py-2 px-3 font-bold text-black rounded md:bg-transparent md:p-0" aria-current="page">Home</a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-3 font-bold text-black rounded md:p-0 ">About</a>
+          <a href="#" class="block py-2 px-3 font-bold text-black rounded md:p-0 ">Mis Restaurantes</a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-3 font-bold text-black rounded  md:hover:bg-transparent  md:p-0">Services</a>
+            <Link :href="route('restaurants.create')" class="block py-2 px-3 font-bold text-black rounded md:p-0">
+    Crear Restaurant
+  </Link> 
         </li>
         <li>
           <a href="#" class="block py-2 px-3 font-bold text-black rounded  md:hover:bg-transparent md:p-0">Contact</a>
