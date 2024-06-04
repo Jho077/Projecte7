@@ -5,12 +5,15 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 use Inertia\Inertia;
 use App\Models\Rating;
 use App\Models\Restaurant;
-use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\RatingController;
+use App\Http\Controllers\CommentController;
 
 
 Route::get('/', function () {
@@ -47,6 +50,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+
+
+Route::resource('restaurants', RestaurantController::class);
+
+
 
 
 

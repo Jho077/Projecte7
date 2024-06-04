@@ -16,7 +16,7 @@
       </svg>
   </button>
 </div>
-    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 ml-32" id="navbar-sticky">
       <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0    dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
         <li>
           <a href="#" class="block py-2 px-3 font-bold text-black rounded md:bg-transparent md:p-0" aria-current="page">Home</a>
