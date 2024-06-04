@@ -50,7 +50,7 @@ class RatingController extends Controller
     $rating->rating = $request->rating;
     $rating->save();
     
-    return Inertia::location(route('showRestaurant', ['id' => $request->restaurant_id]));
+    return Inertia::location(route('showRestaurant', ['id' => $request->restaurant_id,]));
     }
     /**
      * Display the specified resource.

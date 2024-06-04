@@ -50,17 +50,25 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-
-
-// Rutas para los restaurants
+    // Rutas para los restaurants
 Route::resource('restaurants', RestaurantController::class);
 Route::post('/restaurants/{id}',[RestaurantController::class, 'update'])->name('updateImage');
 Route::get('/restaurants/{id}/index',[RestaurantController::class, 'index'])->name('showRestaurant');
 
 // Ruta para crear una valoración
 Route::post('/ratings', [RatingController::class, 'store'])->name('ratings.store');
+
+// Ruta para crear un comentario
+Route::post('/comments', [CommentController::class, 'store'])->name('comments.store'); 
+ 
+Route::put('/comments/{comment}/update', [CommentController::class, 'update'])->name('comments.update');
+Route::delete('/comments/{id}/delete', [CommentController::class, 'destroy'])->name('comments.destroy');
+
+});
+
+
+
+
 
 
 

@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Rating;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 
 class RestaurantController extends Controller
@@ -18,6 +20,7 @@ class RestaurantController extends Controller
      */
         public function index($id)
     {
+        $user = Auth::user();
         // Busca el restaurante por su id
         $restaurant = Restaurant::find($id);
 
@@ -27,15 +30,23 @@ class RestaurantController extends Controller
         }
 
         // Obtener todas las valoraciones asociadas a este restaurante
-    $ratings = Rating::where('restaurant_id', $restaurant->id)->get();
+        $ratings = Rating::where('restaurant_id', $restaurant->id)->get();
 
-     // Calcular el promedio de las valoraciones
-     $averageRating = $ratings->avg('rating');
+        // Calcular el promedio de las valoraciones
+        $averageRating = $ratings->avg('rating');
+        // Obtener la puntuación del usuario actual si ha votado
+        $userRating = $ratings->where('user_id', $user->id)->first();
+
+         // Obtener todos los comentarios asociados a este restaurante
+        $comments = Comment::where('restaurant_id', $restaurant->id)->with('user')->get();
 
         // Si se encuentra el restaurante, pasa los datos a la vista
-    return Inertia::render('Restaurant/Index', [
+        return Inertia::render('Restaurant/Index', [
         'restaurant' => $restaurant,
-        'ratings' => $averageRating
+        'ratings' => $averageRating,
+        'comments' => $comments,
+        'userRating' => $userRating ? $userRating->rating : null,
+        'user' => $user,
     ]);
     }
 
