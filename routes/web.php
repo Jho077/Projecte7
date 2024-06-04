@@ -55,6 +55,7 @@ Route::middleware('auth')->group(function () {
 
 
 Route::resource('restaurants', RestaurantController::class);
+Route::post('/restaurants/{id}',[RestaurantController::class, 'update'])->name('updateImage');
 
 
 

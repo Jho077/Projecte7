@@ -1,25 +1,15 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import { Head } from '@inertiajs/vue3';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import Navbar from '@/Components/Navbar.vue';
 import Search from '@/Components/Search.vue';
 import CardRestaurant from '@/Components/CardRestaurant.vue';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { computed } from 'vue';
 
 const props = defineProps({
     loged: Object,
     rating: Array,
     restaurant: Array,
 });
-
-// Filtrar los restaurantes que cumplen la condición
-const filteredRestaurants = computed(() => {
-    return props.restaurant.filter(resto => {
-        return props.rating.some(rating => rating.restaurant_id === resto.id && rating.rating >= 3);
-    });
-});
-
 </script>
 
 <template>
@@ -35,11 +25,12 @@ const filteredRestaurants = computed(() => {
                 <Search></Search>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 justify-items-center mt-8 mx-4 md:mx-0">
-                <CardRestaurant class="cardrestaurant" v-for="resto in filteredRestaurants" :key="resto.id" :restaurant="resto"></CardRestaurant>
+                <CardRestaurant class="cardrestaurant" v-for="resto in props.restaurant" :key="resto.id" :restaurant="resto"></CardRestaurant>
             </div>
         </div>
     </div>
 </template>
+
 <style scoped>
 @media (min-width: 768px) {
     .cardrestaurant {

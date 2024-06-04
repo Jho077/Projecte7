@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Rating;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 
 class RatingController extends Controller
 {
@@ -27,7 +30,13 @@ class RatingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rating = new Rating;
+        $rating->user_id = $request->user()->id;
+        $rating->restaurant_id = $request->restaurant_id;
+        $rating->rating = $request->rating;
+        $rating->save();
+
+        return response()->json(['message' => 'Valoración creada con éxito']);
     }
 
     /**
@@ -51,7 +60,12 @@ class RatingController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->authorize('update', $rating);
+
+        $rating->rating = $request->rating;
+        $rating->save();
+
+        return response()->json(['message' => 'Valoración actualizada con éxito']);
     }
 
     /**
@@ -59,6 +73,10 @@ class RatingController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->authorize('delete', $rating);
+
+        $rating->delete();
+
+        return response()->json;
     }
 }

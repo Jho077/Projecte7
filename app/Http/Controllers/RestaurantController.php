@@ -32,23 +32,25 @@ class RestaurantController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-{
+        public function store(Request $request)
+    {
 
-    
-    $restaurant = new Restaurant();
-    $restaurant->name = $request->input('name');
-    $restaurant->address = $request->input('address');
-    $restaurant->latitude = $request->input('latitude');
-    $restaurant->longitude = $request->input('longitude');
-    $restaurant->description = $request->input('description');
-    
-    $restaurant->user_id = auth()->id();
-    $restaurant->save();
+        $imagePath = $request->file('image')->store('restaurant_images', 'public');
+        
+        $restaurant = new Restaurant();
+        $restaurant->name = $request->input('name');
+        $restaurant->address = $request->input('address');
+        $restaurant->latitude = $request->input('latitude');
+        $restaurant->longitude = $request->input('longitude');
+        $restaurant->description = $request->input('description');
+        $restaurant->image = $imagePath;
+        
+        $restaurant->user_id = auth()->id();
+        $restaurant->save();
 
-    
-    return redirect()->route('welcome');
-}
+        
+        return redirect()->route('welcome');
+    }
 
 
     /**
@@ -76,24 +78,25 @@ class RestaurantController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-      
-     $restaurant = Restaurant::findOrFail($id);
+{
+    $restaurant = Restaurant::findOrFail($id);
 
-     
-     $restaurant->name = $request->input('name');
-     $restaurant->address = $request->input('address');
-     $restaurant->latitude = $request->input('latitude');
-     $restaurant->longitude = $request->input('longitude');
-     $restaurant->description = $request->input('description');
-     
- 
-     
-     $restaurant->save();
- 
-     
-     return redirect()->route('welcome');
+    $restaurant->name = $request->input('name');
+    $restaurant->address = $request->input('address');
+    $restaurant->latitude = $request->input('latitude');
+    $restaurant->longitude = $request->input('longitude');
+    $restaurant->description = $request->input('description');
+    
+    if($request->hasFile('image')) {
+        $restaurant->image = $request->file('image')->store('restaurant_images', 'public');
     }
+
+    
+    $restaurant->save();
+
+    return Redirect::route('welcome');
+}
+
 
     /**
      * Remove the specified resource from storage.
