@@ -147,5 +147,6 @@ class RestaurantController extends Controller
          
          return Redirect::route('welcome');
      }
+     
     
 }
