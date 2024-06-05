@@ -1,6 +1,6 @@
 <template>
-    <AuthenticatedLayout>
-      <h1 class="text-4xl text-center mt-20 text-5xl font-bold">Tus restaurantes!</h1>
+    <AuthenticatedLayout></AuthenticatedLayout>
+      <h1 class="text-center mt-20 text-5xl font-bold">Tus restaurantes!</h1>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 mt-5">
         <div v-for="(restaurant, index) in restaurants" :key="restaurant.id" :class="getGridItemClass(index)">
           <div class="w-full h-full flex justify-center items-center">
@@ -8,7 +8,6 @@
           </div>
         </div>
       </div>
-    </AuthenticatedLayout>
   </template>
   
   <script setup>

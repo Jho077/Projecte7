@@ -96,7 +96,7 @@ class RestaurantController extends Controller
         $restaurant->save();
 
         
-        return redirect()->route('welcome');
+        return redirect()->route('misRestaurantes');
     }
 
 
