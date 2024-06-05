@@ -17,4 +17,10 @@ export default defineConfig({
             },
         }),
     ],
+    test:{
+        globals: true,
+        environmentMatchGlobs: [
+            ['tests/node/**', 'node'], ['tests/node/**', 'jsdom'] 
+        ]
+    },
 });

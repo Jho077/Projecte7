@@ -5,7 +5,7 @@ use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 
-class AuthenticationTest extends TestCase
+class UserCreate extends TestCase
 {
     use RefreshDatabase;
 
