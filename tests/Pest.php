@@ -46,3 +46,27 @@ function something()
 {
     // ..
 }
+
+/*
+|--------------------------------------------------------------------------
+| Additional Helpers
+|--------------------------------------------------------------------------
+|
+| These are additional helpers that can be used globally in your tests.
+|
+*/
+
+function actingAs($user, $driver = null)
+{
+    return test()->actingAs($user, $driver);
+}
+
+function withExceptionHandling()
+{
+    return test()->withExceptionHandling();
+}
+
+function withoutExceptionHandling()
+{
+    return test()->withoutExceptionHandling();
+}
