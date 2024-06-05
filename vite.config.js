@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 
+
 export default defineConfig({
     plugins: [
         laravel({
@@ -17,4 +18,11 @@ export default defineConfig({
             },
         }),
     ],
+    test: {
+        globals: true,
+        environmentMatchGlobs: [
+            ["tests/Feature/pruebatest.test.js", "node"],
+            ['tests/Feature/**' , 'jsdom']
+        ]
+    },
 });

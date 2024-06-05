@@ -38,6 +38,12 @@ Route::get('/api/restaurants', function (Request $request) {
 
     return response()->json($restaurants);
 });
+
+Route::get('/api/allrestaurants', function (Request $request) {
+    $restaurants = Restaurant::all();
+
+    return response()->json($restaurants);
+});
 // Rutas para Oauth con Google
 Route::get('/google-auth/redirect', function () {
     return Socialite::driver('google')->redirect();
