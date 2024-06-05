@@ -1,3 +1,9 @@
+<script setup>
+import { ref } from 'vue';
+import { Link } from '@inertiajs/inertia-vue3';
+
+</script>
+
 
 <template>
 <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0">
@@ -17,21 +23,23 @@
   </button>
 </div>
     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 ml-32" id="navbar-sticky">
-      <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0    dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-        <li>
-          <a href="#" class="block py-2 px-3 font-bold text-black rounded md:bg-transparent md:p-0" aria-current="page">Home</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 font-bold text-black rounded md:p-0 ">About</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 font-bold text-black rounded  md:hover:bg-transparent  md:p-0">Services</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 font-bold text-black rounded  md:hover:bg-transparent md:p-0">Contact</a>
-        </li>
-      </ul>
+      <ul
+                            class="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0    dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                            <Link :href="route('welcome')" class="block py-2 px-3 font-bold text-black rounded md:p-0">
+                            Inicio
+                            </Link>
+                            <Link :href="route('misRestaurantes')" class="block py-2 px-3 font-bold text-black rounded md:p-0">
+                            Mis Restaurantes
+                            </Link>
+                            <li>
+                                <Link :href="route('restaurants.create')"
+                                    class="block py-2 px-3 font-bold text-black rounded md:p-0">
+                                Crear Restaurant
+                                </Link>
+                            </li>
+                        </ul>
     </div>
     </div>
   </nav>
-</template>  
+</template>
+

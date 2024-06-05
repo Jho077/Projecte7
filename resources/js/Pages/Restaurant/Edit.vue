@@ -80,7 +80,7 @@ const submit = () => {
           <label class="block text-gray-700 text-sm font-bold mb-2" for="image">
             image
           </label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="image" @change="event => form.image = event.target.files[0]" type="file" required>
+          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="image" @change="event => form.image = event.target.files[0]" type="file">
         </div>
         <div class="flex items-center justify-between">
           <button

@@ -50,7 +50,19 @@ class RestaurantController extends Controller
     ]);
     }
 
-    
+    public function misRestaurantes()
+    {
+        $user = Auth::user();
+        
+        // Obtener todos los restaurantes del usuario actual
+        $restaurants = Restaurant::where('user_id', $user->id)->get();
+        
+        // Renderizar la vista con los datos
+        return Inertia::render('Restaurant/MisRestaurants', [
+            'restaurants' => $restaurants  // Cambia 'restaurant' por 'restaurants'
+        ]);
+    }
+
 
 
     /**
@@ -129,7 +141,7 @@ class RestaurantController extends Controller
     
     $restaurant->save();
 
-    return Redirect::route('welcome');
+    return Redirect::route('misRestaurantes');
 }
 
 
@@ -145,7 +157,7 @@ class RestaurantController extends Controller
          $restaurant->delete();
  
          
-         return Redirect::route('welcome');
+         return Redirect::route('misRestaurantes');
      }
      
     

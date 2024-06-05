@@ -67,19 +67,14 @@ const showingNavigationDropdown = ref(false);
                             <Link :href="route('welcome')" class="block py-2 px-3 font-bold text-black rounded md:p-0">
                             Inicio
                             </Link>
-                            <li>
-                                <a href="#" class="block py-2 px-3 font-bold text-black rounded md:p-0 ">Mis
-                                    Restaurantes</a>
-                            </li>
+                            <Link :href="route('misRestaurantes')" class="block py-2 px-3 font-bold text-black rounded md:p-0">
+                            Mis Restaurantes
+                            </Link>
                             <li>
                                 <Link :href="route('restaurants.create')"
                                     class="block py-2 px-3 font-bold text-black rounded md:p-0">
                                 Crear Restaurant
                                 </Link>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="block py-2 px-3 font-bold text-black rounded  md:hover:bg-transparent md:p-0">Contact</a>
                             </li>
                         </ul>
                     </div>

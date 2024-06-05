@@ -78,6 +78,8 @@ Route::post('/comments', [CommentController::class, 'store'])->name('comments.st
 Route::put('/comments/{comment}/update', [CommentController::class, 'update'])->name('comments.update');
 Route::delete('/comments/{id}/delete', [CommentController::class, 'destroy'])->name('comments.destroy');
 
+Route::get('/misRestaurantes', [RestaurantController::class, 'misRestaurantes'])->name('misRestaurantes');
+
 });
 
 
