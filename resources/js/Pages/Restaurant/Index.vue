@@ -3,9 +3,28 @@ import { useForm } from '@inertiajs/vue3';
 import { defineProps } from 'vue';
 import { Link } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
+import L from 'leaflet';
+import "leaflet/dist/leaflet.css";
 
+let map;
+var popup = L.popup();
+var longitude
+var latitude
+
+
+onMounted(() => {
+    map = L.map('mapid').setView([props.restaurant.latitude, props.restaurant.longitude], 15);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+    }).addTo(map);
+
+    let currentMarker;
+    currentMarker = L.marker([props.restaurant.latitude, props.restaurant.longitude]);
+    currentMarker.addTo(map);
+
+});
 const rating = ref('');
 const comment = ref('');
 const editingCommentId = ref(null);
@@ -101,12 +120,14 @@ function deleteComment(commentId, restaurantId) {
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
 
 
-                
+
                 <!-- Espacio 1 -->
                 <div class="bg-gray-800 p-4 rounded-lg flex justify-center text-white">
                     <div class="flex flex-col items-center text-left">
                         <p class="text-xl font-bold mb-4">Datos generales</p>
                         <p class="mb-2">Nombre: {{ props.restaurant.name }}</p>
+                        <p class="mb-2">longitud: {{ props.restaurant.longitude }}</p>
+                        <p class="mb-2">latitud: {{ props.restaurant.latitude }}</p>
                         <p class="mb-2">Dirección: {{ props.restaurant.address }}</p>
                         <p class="mb-2">Descripción: {{ props.restaurant.description }}</p>
                     </div>
@@ -189,8 +210,9 @@ function deleteComment(commentId, restaurantId) {
 
                 <!-- Espacio 4 -->
                 <div class="bg-gray-800 p-4 rounded-lg flex justify-center text-white mb-8">
-                    <div class="text-xl font-bold mb-4 flex flex-col items-center text-left">
+                    <div class="text-xl font-bold mb-4 flex flex-col items-center text-left w-full">
                         <p> Mapa </p>
+                        <div id="mapid" style="height: 400px; width: 100%; max-width: 800px; overflow: hidden;"></div>
                     </div>
                 </div>
             </div>

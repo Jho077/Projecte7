@@ -15,6 +15,7 @@ use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\CommentController;
 
+
 //Ruta del welcome
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -23,7 +24,20 @@ Route::get('/', function () {
         'restaurant' => Restaurant::all(),
     ]);
 })->name('welcome');
+Route::get('/api/restaurants', function (Request $request) {
+    
+    $rating = $request->query('rating', 0);
 
+    $restaurants = DB::select('
+        SELECT rr.*, AVG(r.rating) as average_rating
+        FROM restaurants rr
+        LEFT JOIN ratings r ON rr.id = r.restaurant_id 
+        GROUP BY rr.id
+        HAVING average_rating <= ?
+    ', [$rating]);
+
+    return response()->json($restaurants);
+});
 // Rutas para Oauth con Google
 Route::get('/google-auth/redirect', function () {
     return Socialite::driver('google')->redirect();
